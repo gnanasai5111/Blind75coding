@@ -81,3 +81,54 @@ class Solution {
 
 Time complexity - o(N)
 Space complexity - o(N)
+
+
+Approach 4 : Sorting and two pointer
+
+- Add the elements to an array List with value and indexes as a pair.
+- Sort the elements based on the values in ascending order.
+- Keep two pointers.one at the start and other at the end of the array.
+- Now add the values at two pointers. 
+- If the sum exceeds the target, then reduce the pointer which is at the end of array.
+- If the sum is less than the target, then increment the pointer which is at the start of the array.
+- Repeat this process till you find the pair thats equal to the target and terminates when start reaches the end 
+
+
+class Solution {
+    class Pair{
+        int val;
+        int index;
+        public Pair(int val,int index){
+            this.val=val;
+            this.index=index;
+        }
+    }
+    public int[] twoSum(int[] nums, int target) {
+        ArrayList<Pair> a=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            a.add(new Pair(nums[i],i));
+        }
+
+        Collections.sort(a,(x,y)->x.val-y.val);
+
+        int i=0;
+        int j=a.size()-1;
+        while(i<j){
+            Pair p1=a.get(i);
+            Pair p2=a.get(j);
+            if(p1.val+p2.val>target){
+                j--;
+            }
+            else if(p1.val+p2.val<target){
+                i++;
+            }
+            else{
+                return new int[]{p1.index,p2.index};
+            }
+        }
+        return new int[]{};
+    }
+}
+
+Time complexity - o(NlogN)
+Space complexity - o(N)
