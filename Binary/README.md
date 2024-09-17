@@ -54,3 +54,13 @@ class Solution {
 Time complexity - o(N)
 Space complexity - o(1)
 ```
+
+### 1's Complement
+
+- Convert the decimal number to binary equivalent and flip the bits( 1 to 0 and 0 to 1)
+
+### 2's Complement
+
+- Convert the number to  1's complemnt first then add 1 to it
+
+
