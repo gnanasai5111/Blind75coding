@@ -83,6 +83,11 @@ Space complexity - o(1)
 ### Negative number binary representation
 
 - Convert the number to 2's compliment
-- 
+
+### Left Shift (<<) Operators
+- The left shift(<<) is a binary operator that takes two numbers, left shifts the bits of the first operand, and the second operand decides the number of places to shift. In other words, left-shifting an integer “a” with an integer “b” denoted as ‘(a<<b)’ is equivalent to multiplying a with 2^b (2 raised to power b).
+
+### Right Shift(>>) Operators
+- Right Shift(>>) is a binary operator that takes two numbers, right shifts the bits of the first operand, and the second operand decides the number of places to shift. In other words, right-shifting an integer “a” with an integer “b” denoted as ‘(a>>b)‘ is equivalent to dividing a with 2^b. 
 
 
