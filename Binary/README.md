@@ -63,4 +63,26 @@ Space complexity - o(1)
 
 - Convert the number to  1's complemnt first then add 1 to it
 
+### AND
+
+- The AND operator compares each bit of two numbers and returns 1 only if both bits are 1; otherwise, it returns 0.
+
+### OR
+
+- The OR operator compares each bit of two numbers and returns 1 if at least one of the bits is 1; otherwise, it returns 0.
+
+### XOR
+
+- The XOR operator returns 1 if the corresponding bits of the two numbers are different; otherwise, it returns 0.
+
+### NOT
+
+- The NOT operator is a unary operator that flips all bits of the number (i.e., 0 becomes 1 and 1 becomes 0).
+
+
+### Negative number binary representation
+
+- Convert the number to 2's compliment
+- 
+
 
