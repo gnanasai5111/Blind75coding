@@ -1,10 +1,10 @@
-### Decimal and Binary Formats
+## Decimal and Binary Formats
 
-## Decimal (Base 10):
+### Decimal (Base 10):
 The decimal system is the standard system for denoting integers and non-integer numbers. It is based on 10 different digits (0-9).
 Example: 25 in decimal means 2 * 10^1 + 5 * 10^0 = 25.
 
-## Binary (Base 2):
+### Binary (Base 2):
 
 Binary is the numbering system that uses only two digits, 0 and 1. It's used internally by computers and other electronic devices.
 Example: The binary number 1101 represents 1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0 = 13 in decimal.
