@@ -127,6 +127,51 @@ class Solution {
 Time complexity -O(N * amount)
 space complexity - O(N * amount)
 
+Similar approach :
+
+class Solution {
+    public int findMinCoins(int coins[], int target, int[] memo) {
+        // Base case: If the target is 0, no coins are needed.
+        if (target == 0) {
+            return 0;
+        }
+
+        // Check if the result for this target is already computed.
+        if (memo[target] != -1) {
+            return memo[target];
+        }
+
+        int minWays = Integer.MAX_VALUE;
+
+        // Try every coin and recursively solve for the remaining target.
+        for (int i = coins.length - 1; i >= 0; i--) {
+            if (coins[i] <= target) {
+                int res = findMinCoins(coins, target - coins[i], memo);
+                if (res != Integer.MAX_VALUE) {
+                    minWays = Math.min(minWays, 1 + res);
+                }
+            }
+        }
+
+        // Store the result in the memo array.
+        memo[target] = minWays;
+        return minWays;
+    }
+
+    public int coinChange(int[] coins, int amount) {
+        // Create a memoization array initialized with -1 (meaning uncalculated).
+        int[] memo = new int[amount + 1];
+        Arrays.fill(memo, -1);
+
+        // Calculate the result using the helper function with memoization.
+        int res = findMinCoins(coins, amount, memo);
+
+        // Return the result, or -1 if no solution was found.
+        return res == Integer.MAX_VALUE ? -1 : res;
+    }
+}
+
+
 Third approach : Tabulation
 
 - This Java solution uses dynamic programming to solve the Coin Change problem.
