@@ -127,4 +127,38 @@ class Solution {
 Time complexity -O(N * amount)
 space complexity - O(N * amount)
 
- 
+Third approach : Tabulation
+
+- This Java solution uses dynamic programming to solve the Coin Change problem.
+- An array dp[] is created with size amount + 1, where each index represents the minimum number of coins needed to achieve that amount.
+- Base case: dp[0] = 0, meaning 0 coins are needed to achieve an amount of 0.
+- For each amount from 1 to amount, the algorithm finds the minimum number of coins required by checking each coin in the coins[] array.
+- For each coin that is less than or equal to the current amount, it calculates the remainder (rem = i - coin[j]).
+- If the value for the remainder (dp[rem]) is valid (i.e., not Integer.MAX_VALUE), it calculates the minimum number of coins
+  required by comparing min with 1 + dp[rem].
+- The minimum value is stored in dp[i], representing the fewest coins needed to form that amount.
+- After filling the dp[] array, the solution returns the value in dp[amount].
+- If dp[amount] is still Integer.MAX_VALUE, it means the amount cannot be formed with the given coins, so -1 is returned.
+  Otherwise, the minimum number of coins required is returned.
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int dp[]=new int[amount+1];
+        dp[0]=0;
+        for(int i=1;i<dp.length;i++){
+            int min=Integer.MAX_VALUE;
+            for(int j=0;j<coins.length;j++){
+                if(coins[j]<=i){
+                    int rem=i-coins[j];
+                     if (dp[rem] != Integer.MAX_VALUE) {
+                        min = Math.min(min, 1 + dp[rem]);
+                    }
+                }
+            }
+            dp[i]=min;
+        } 
+        return dp[amount]==Integer.MAX_VALUE?-1:dp[amount];       
+    }
+}
+Time complexity -O(N * amount)
+space complexity - O(amount)
