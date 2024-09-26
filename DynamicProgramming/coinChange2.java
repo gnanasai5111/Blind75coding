@@ -81,3 +81,82 @@ class Solution {
 
 Time complexity - o(N*amount)
 Space complexity - o(N* amount)
+
+Approach 3 :
+
+- A 2D array dp[][] is created where dp[i][j] represents the number of ways to make an amount j using the first i coins.
+- dp[0][0] = 1 is initialized, which means there is exactly 1 way to make the amount 0 (using no coins).
+Filling the dp table:
+- The outer loop (i) iterates over the coins, starting from 1 to coins.length. The index i-1 refers to the current coin being considered.
+- The inner loop (j) iterates over all target amounts from 0 to the given amount.
+Two choices for each coin:
+- Not take the current coin: This is done by copying the result from dp[i-1][j], meaning the number of ways to make amount j without
+  using the current coin.
+- Take the current coin (if possible): If the coin can be used (i.e., coins[i-1] <= j), we add the value dp[i][j - coins[i-1]] to 
+  dp[i][j]. This adds the number of ways to make amount j - coins[i-1] using the current coin.
+Result:
+- The result is stored in dp[coins.length][amount], which contains the number of ways to make the target amount using all the coins.
+
+class Solution {
+    public int change(int amount, int[] coins) {
+        int dp[][]=new int[coins.length+1][amount+1];
+        dp[0][0]=1;
+        for(int i=1;i<dp.length;i++){
+            for(int j=0;j<=amount;j++){
+                dp[i][j]=dp[i-1][j];
+                if(coins[i-1]<=j){
+                    dp[i][j]+=dp[i][j-coins[i-1]];
+                }
+            }
+        }
+        return dp[coins.length][amount];
+        
+    }
+}
+
+Time complexity - o(N*amount)
+Space complexity - o(N* amount)
+
+Fourth approach :
+
+Initialization:
+
+- A dp[] array of size amount + 1 is created to store the number of ways to make each amount from 0 to amount.
+- dp[0] = 1 is initialized because there is exactly one way to make the amount 0 (by taking no coins).
+Outer loop (Coins):
+- The outer loop iterates over each coin using i, starting from 1 to coins.length. The coin being processed is coins[i-1].
+Inner loop (Target amounts):
+- The inner loop iterates over all possible amounts j from 0 to amount.
+- A temporary array temp[] is created to hold intermediate results for the current coin.
+Updating temp[]:
+- For each j, temp[j] is initialized with the value of dp[j] (which represents the number of ways to make amount j without
+  considering the current coin).
+- If the current coin can be used (coins[i-1] <= j), temp[j] is incremented by temp[j - coins[i-1]], which adds the number of ways to 
+  make the reduced amount j - coins[i-1].
+  Updating dp[]:
+- After processing each coin, the dp[] array is updated with the values from temp[], which now includes the results for the
+  current coin.
+Result:
+- The final result is stored in dp[amount], which gives the number of ways to make the target amount using the given coins.
+
+class Solution {
+    public int change(int amount, int[] coins) {
+        int dp[]=new int[amount+1];
+        dp[0]=1;
+        for(int i=1;i<=coins.length;i++){
+            int temp[]=new int[amount+1];
+            for(int j=0;j<=amount;j++){
+                temp[j]=dp[j];
+                if(coins[i-1]<=j){
+                    temp[j]+=temp[j-coins[i-1]];
+                }
+            }
+            dp=temp;
+        }
+        return dp[amount];
+        
+    }
+}
+
+Time complexity - o(N*amount)
+Space complexity - o(amount)
