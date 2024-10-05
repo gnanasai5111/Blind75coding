@@ -17,6 +17,15 @@ Explanation: From the top-left corner, there are a total of 3 ways to reach the 
 
 First approach : (Recursion)
 
+- This solution calculates the number of unique paths from the top-left corner of a grid to the bottom-right corner, where movement is restricted to either right or down. 
+- The method uses recursion to explore all possible paths.
+- The findPaths method is called recursively with two parameters r and c, which represent the current position (row and column) in the grid. 
+- If the current position exceeds the grid boundaries (r >= m or c >= n), it returns 0 because it is out of bounds. 
+- If the position reaches the bottom-right corner (r == m-1 && c == n-1), it returns 1, representing a valid path.
+- At each step, the method recursively explores two options: moving down (r+1, c) and moving right (r, c+1).
+- The results of these two recursive calls are summed to calculate the total number of paths.
+- Finally, the uniquePaths function initiates the recursive exploration by starting from the top-left corner (0, 0) and passing the dimensions of the grid (m and n).
+
 class Solution {
     public int findPaths(int r,int c,int m, int n){
         if(r>=m || c>=n){
@@ -36,6 +45,17 @@ Time complexity -  O(M*N)
 Space complexity -  O(M*N)
 
 Second approach - Memoization 
+
+- This solution computes the number of unique paths in a grid using recursion with memoization. 
+- The goal is to find how many ways there are to move from the top-left corner to the bottom-right corner, only allowing movements either down or right.
+- The findPaths method is called recursively to explore all possible paths. It takes in the current position (r, c) and checks if it is out of bounds (r >= m || c >= n).
+- If so, it returns 0, indicating that no valid path exists.
+- Memoization is used to avoid redundant calculations. The memo array stores results of previously computed subproblems.
+- If the result for the current cell has already been computed (memo[r][c] != 0), it is returned directly.
+- If the current position is the bottom-right corner (r == m-1 && c == n-1), the method returns 1, as it represents a valid path.
+- The method recursively calculates the total number of paths by summing up the results of moving either down (r+1, c) or right (r, c+1).
+- The result is stored in the memo array for future reference.
+- Finally, the uniquePaths function initializes the memoization array and starts the recursive process from the top-left corner (0, 0)
 
 class Solution {
     public int findPaths(int r,int c,int m, int n,int memo[][]){
@@ -60,6 +80,16 @@ Time complexity -  O(M*N)
 Space complexity - O((N-1)+(M-1)) + O(M*N)
 
 Approach 3 : Tabulation
+
+- This solution uses dynamic programming to calculate the number of unique paths in a grid.
+- The objective is to determine how many ways there are to move from the top-left corner to the bottom-right corner, with movements restricted to either right or down.
+- A 2D array dp of size m x n is initialized to store the number of unique paths to reach each cell in the grid.
+- The loops iterate over each cell in the grid. If the cell is at the top-left corner (i == 0 && j == 0), it is set to 1, as there is only one way to reach the starting point.
+- For other cells, two possible paths are considered:
+- From the cell directly above (dp[i-1][j]), if it exists.
+- From the cell directly to the left (dp[i][j-1]), if it exists.
+- The value of the current cell dp[i][j] is computed by summing these two possible paths. 
+- After processing all cells, the value at the bottom-right corner (dp[m-1][n-1]) gives the total number of unique paths from the start to the end.
 
 class Solution {
     public int uniquePaths(int m, int n) {
@@ -87,6 +117,17 @@ Time complexity -  O(M*N)
 Space complexity - O(M*N)
 
 Fourth approach :
+
+- This solution optimizes space by using a 1D array to calculate the number of unique paths in a grid. 
+- Instead of using a full 2D array, it maintains two arrays: prev to store the previous row's values and temp for the current row.
+- The outer loop iterates through the rows, and the inner loop processes each column.
+- At the start of each row, a new temp array is initialized to hold the current row’s results.
+- If the cell is the top-left corner (i == 0 && j == 0), it's set to 1, representing one way to reach the starting point.
+For other cells:
+- If there is a row above, the value from prev[j] (the above cell) is considered.
+- If there is a column to the left, the value from temp[j-1] (the left cell) is considered.
+- The current cell temp[j] is set as the sum of these two possible paths.
+- At the end of each row, prev is updated to store the current row’s values (temp), and this process continues. The value at prev[n-1] gives the total number of unique paths.
 
 class Solution {
     public int uniquePaths(int m, int n) {
