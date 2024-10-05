@@ -53,7 +53,7 @@ class Solution {
 }
 
 Time complexity - exponential
-Space complexity - o(N)
+Space complexity - o(K*X)
 
 Approach 2 :
 
@@ -98,4 +98,4 @@ class Solution {
 
 
 Time complexity - exponential
-Space complexity - o(N)
+Space complexity - o(K*X)
