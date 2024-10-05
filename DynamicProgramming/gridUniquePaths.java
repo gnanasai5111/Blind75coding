@@ -155,3 +155,31 @@ class Solution {
 
 Time complexity -  O(M*N)
 Space complexity - O(N)
+
+Fifth apprach :
+
+- The solution calculates the number of unique paths in an m x n grid using a combinatorial approach.
+- The robot can move either right or down, and the task is to compute how many distinct sequences of moves will lead from the 
+  top-left corner to the bottom-right corner.
+- In this approach, the total number of moves the robot makes is m + n - 2 (since it makes m-1 down moves and n-1 right moves). 
+- The problem reduces to finding how many ways we can choose m-1 moves (down) from the total m + n - 2 moves, which is represented 
+ by the combination formula C(N, r) where N = m + n - 2 and r = m - 1.
+- The loop iterates to calculate the combination formula without calculating large factorials directly.
+- It does this efficiently by multiplying terms one by one and dividing at each step to avoid overflow.
+- Finally, the result is cast to an integer and returned, representing the number of unique paths.
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int N=m+n-2;
+        int r=m-1;
+        double res=1;
+        for(int i=1;i<=r;i++){
+            res=res*(N-r+i)/i;
+        }
+        return (int)res;
+        
+    }
+}
+
+Time complexity -  O(M)
+Space complexity - O(1)
