@@ -34,3 +34,39 @@ class Solution {
 
 Time complexity - o(N*N)
 Space complexity - o(N*N)
+
+Approach 2:
+
+- This solution rotates a square matrix (2D array) by 90 degrees clockwise. The process is divided into two main steps:
+- Transpose the matrix: In this step, the elements of the matrix are swapped across its diagonal, converting rows into columns. 
+- The elements at positions matrix[i][j] are swapped with matrix[j][i] for all i <= j.
+- Reverse each row: After transposing, each row of the matrix is reversed, which effectively rotates the matrix by 90 degrees clockwise.
+- The elements in each row are swapped from the start and end, moving towards the center.
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n=matrix.length;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+        }
+        for(int i=0;i<n;i++){
+           int j=0;
+           int k=n-1;
+           while(j<k){
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[i][k];
+                matrix[i][k]=temp;
+                j++;
+                k--;
+           }
+        }
+    }
+}
+
+
+Time complexity - o(N*N)
+Space complexity - o(1)
