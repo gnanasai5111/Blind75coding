@@ -59,4 +59,59 @@ class Solution {
 
 Time complexity - o(N)
 Space complexity - o(N)
+
+
+Approach 2: 
+
+- Finding the middle node: The findMiddle method uses the two-pointer technique (slow and fast pointers) to locate the middle
+  node of the linked list.
+- Reversing the second half: The findReverse method takes the second half of the list, starting from middle.next, and reverses it.
+- Breaking the list: After finding the middle node, the link between the first and second halves of the list is broken by setting
+  middle.next = null.
+- Merging the two halves: The reorderList method then merges the first half and the reversed second half in an alternating fashion.
+- It does so by keeping track of the next nodes in both halves and updating their next pointers accordingly.
+- Termination: The loop continues until one of the halves is exhausted, ensuring the reordered list is formed correctly
+
+class Solution {
+    public ListNode findMiddle(ListNode head){
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public ListNode findReverse(ListNode head){
+        ListNode curr=head;
+        ListNode prev=null;
+        while(curr!=null){
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    public void reorderList(ListNode head) {
+        ListNode middle=findMiddle(head);
+        ListNode reverse=findReverse(middle.next);
+        middle.next=null;
+        ListNode c1=head;
+        ListNode c2=reverse;
+        while(c1!=null && c2!=null){
+            ListNode firstHalfNext=c1.next;
+            ListNode secondHalfNext=c2.next;
+            c1.next=c2;
+            c2.next=firstHalfNext;
+            c1=firstHalfNext;
+            c2=secondHalfNext;
+
+        }
+
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
   
