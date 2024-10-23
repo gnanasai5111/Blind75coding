@@ -109,7 +109,7 @@ class Solution {
 }
 
 Time complexity - o(N*N)
-Space complexity - o(N)
+Space complexity - o(N*N)
 
 
 Third approach : expand around center
