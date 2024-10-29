@@ -14,7 +14,8 @@ First approach :
 - For each pair, it assigns variables s1, e1, s2, and e2 to represent the start and end times of the two meetings. 
 - It then checks if the start of one meeting falls within the time range of the other meeting, indicating a conflict.
 - If any overlap is found, the method returns false, indicating it's impossible to attend all meetings. 
-- If no overlapping meetings are found after all comparisons, the method returns true, indicating that attending all meetings is feasible.
+- If no overlapping meetings are found after all comparisons, the method returns true, indicating that attending all meetings is
+  feasible.
 
 class Solution {
     public boolean canAttendMeetings(int[][] intervals) {
