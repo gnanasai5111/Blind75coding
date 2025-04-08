@@ -56,7 +56,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N*26)
+Time complexity - o(N*N*26)
 Space complexity - o(N)
 
 First approach :
