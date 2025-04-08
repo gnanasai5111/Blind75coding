@@ -9,6 +9,56 @@ Input: s = "ABAB", k = 2
 Output: 4
 Explanation: Replace the two 'A's with two 'B's or vice versa.
 
+Recursion :
+
+- Recursively explore every character index.
+- At each position, try replacing the character with every letter from 'A' to 'Z'
+- If the replacement character is different from the original, count it as a used change (used = 1).
+- Only proceed if the remaining allowed replacements (k - used) is still valid (≥ 0).
+- After trying a change, reset the character to its original using backtracking to explore other possibilities.
+- Once the end of the string is reached (base case), calculate the longest substring of same characters using a helper method.
+- Update the global maxLen accordingly
+- Goes through the string and finds the length of the longest contiguous block of the same character.
+
+class Solution {
+    int maxLen=0;
+    public int getLongestSameCharLen(StringBuilder sb){
+        int c=1,max=1;
+        for(int i=1;i<sb.length();i++){
+            if(sb.charAt(i)==sb.charAt(i-1)){
+                c++;
+            }
+            else{
+                c=1;
+            }
+            max=Math.max(max,c);
+        }
+        return max;
+    }
+    public void dfs(int index,StringBuilder s, int k){
+        if (index == s.length()) {
+            maxLen = Math.max(maxLen, getLongestSameCharLen(s));
+            return;
+        }
+        char originalChar=s.charAt(index);
+        for(char i='A';i<='Z';i++){
+            int used=i==originalChar?0:1;
+            if(k-used>=0){
+                s.setCharAt(index,i);
+                dfs(index+1,s,k-used);
+                s.setCharAt(index,originalChar);
+            }
+        }
+    }
+    public int characterReplacement(String s, int k) {
+        dfs(0,new StringBuilder(s),k);
+        return maxLen;
+    }
+}
+
+Time complexity - o(N*26)
+Space complexity - o(N)
+
 First approach :
 
 - This solution solves the problem of finding the longest substring where up to k characters can be replaced to make all characters
